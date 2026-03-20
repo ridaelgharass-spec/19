@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>مصاريف - متتبع المصاريف الشخصية</title>
+    
+    <!-- SEO & Meta Tags -->
+    <meta name="description" content="تطبيق بسيط وسهل لتتبع مصاريفك الشخصية وإدارة ميزانيتك اليومية بواجهة عربية عصرية." />
+    <meta name="keywords" content="مصاريف, ميزانية, تتبع مالي, توفير, ادخار, ميزانية شخصية" />
+    <meta name="author" content="مصاريف" />
+    <meta name="theme-color" content="#4f46e5" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="مصاريف - متتبع المصاريف الشخصية" />
+    <meta property="og:description" content="إدارة ميزانيتك اليومية بكل سهولة ويسر." />
+    <meta property="og:image" content="https://picsum.photos/seed/finance/1200/630" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="مصاريف - متتبع المصاريف الشخصية" />
+    <meta property="twitter:description" content="إدارة ميزانيتك اليومية بكل سهولة ويسر." />
+    <meta property="twitter:image" content="https://picsum.photos/seed/finance/1200/630" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      :root {
+        --bg-light: #f8fafc;
+        --bg-dark: #020617;
+      }
+      html {
+        background-color: var(--bg-light);
+      }
+      html.dark {
+        background-color: var(--bg-dark);
+      }
+      body {
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+        -webkit-tap-highlight-color: transparent;
+        margin: 0;
+        padding: 0;
+        background-color: inherit;
+      }
+      #loading-screen {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: inherit;
+        z-index: 9999;
+        transition: opacity 0.4s ease-out;
+      }
+      .spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid #e2e8f0;
+        border-top: 4px solid #4f46e5;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      .dark .spinner {
+        border-color: #1e293b;
+        border-top-color: #6366f1;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .loading-text {
+        margin-top: 16px;
+        font-size: 14px;
+        color: #64748b;
+        font-weight: 500;
+      }
+      .dark .loading-text {
+        color: #94a3b8;
+      }
+    </style>
+    <script>
+      // Immediate theme detection to prevent white flash
+      (function() {
+        try {
+          const saved = localStorage.getItem('darkMode');
+          const isDark = saved ? JSON.parse(saved) : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (isDark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="text-slate-900 dark:text-slate-100 overflow-x-hidden">
+    <div id="loading-screen">
+      <div class="spinner"></div>
+      <div class="loading-text">جاري التحميل...</div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.addEventListener('load', () => {
+        const loader = document.getElementById('loading-screen');
+        if (loader) {
+          loader.style.opacity = '0';
+          setTimeout(() => loader.remove(), 500);
+        }
+      });
+    </script>
+  </body>
+</html>
+
